@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>PDF Viewer</title>
+		<meta charset="UTF-8">
+		<meta content="width=device-width,none-scale=1,shrink-to-fit=no" name="viewport">
+		<link rel="icon" href="data:,">
+		<script type="text/javascript" src="pdf.min.js"></script>
+		<script>
+			const init = (nameRoute) => {           
+				let	loadingTask = pdfjsLib.getDocument(nameRoute),
+					pdfDoc = null;
+
+				loadingTask.promise.then(doc => {
+					pdfDoc = doc;
+					for(i=1;i<pdfDoc.numPages+1;i++) {
+						let 	canvas = document.createElement('canvas'),
+							context = canvas.getContext('2d');
+						document.querySelector('main').appendChild(canvas);
+						rendering(i,canvas,context);
+					}
+				});
+				
+				const rendering = (numPage,canvas,context) => {
+					pdfDoc.getPage(numPage).then(page => {
+						let viewport = page.getViewport({ scale: 1 });
+						canvas.height = viewport.height;
+						canvas.width = viewport.width;
+						let renderContext = {
+							canvasContext : context,
+							viewport:  viewport
+						}
+						page.render(renderContext);
+						canvas.classList.add('canvas');
+					})
+				}
+			}
+			window.onload = () => {
+				init('sample.pdf');
+			}
+		</script>
+		<style>
+			body {background-color:#E6E6E6;margin:0;padding:0;text-align:center}
+			main {margin:3vh auto;display:flex;flex-wrap:wrap;gap:2vw 0.1vw;width:auto;justify-content:center;}
+			.canvas {width:auto;height:94vh;border:solid 0.1vw #C6C6C6}
+			@media (max-width: 1200px) {
+				main {display:block;}
+				.canvas {margin:3vw 3vw 0 3vw;width:94vw!important;height:auto!important;}
+			}
+		</style>
+	</head>
+	<body>
+		<main></main>
+	</body>
+</html>
