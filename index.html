@@ -40,7 +40,7 @@
 			}
 			document.addEventListener('contextmenu', event => event.preventDefault());
 			document.addEventListener("keydown", function(e) {
-				(navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.preventDefault();
+				((navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) || e.keyCode == 123) && e.preventDefault();
 			}, false);
 		</script>
 		<style>
