@@ -3,7 +3,10 @@
 	<head>
 		<title>PDF Viewer</title>
 		<meta charset="UTF-8">
-		<meta content="width=device-width,none-scale=1,shrink-to-fit=no" name="viewport">
+		<meta content="width=device-width,shrink-to-fit=no" name="viewport">
+		<meta content="yes" name="mobile-web-app-capable">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="#E6E6E6" name="theme-color">
 		<link rel="icon" href="data:,">
 		<script type="text/javascript" src="pdf.min.js"></script>
 		<script>
@@ -47,6 +50,9 @@
 			body {background-color:#E6E6E6;margin:0;padding:0;text-align:center}
 			main {margin:3vh auto;display:flex;flex-wrap:wrap;gap:2vw 0.1vw;width:auto;justify-content:center;}
 			.canvas {width:auto;height:94vh;border:solid 0.1vw #C6C6C6}
+			@supports (-webkit-touch-callout: none) {
+  				.canvas {height:90vh;}
+			}
 			@media (max-width:950px) {
 				main {display:block;}
 				.canvas {margin:3vw 3vw 0 3vw;width:94vw!important;height:auto!important;}
