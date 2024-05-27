@@ -2,8 +2,8 @@
 
 # PDF Viewer
 A very minimum code PDF viewer, powered by Mozilla PDFJS
-- single html file, 59 lines
-- css, 7 lines
+- single html file, 65 lines
+- css, 10 lines
 - javascript pdf viewer, 35 lines
 - two pages view on desktop, and automatically turns to single page on mobile
 - disabling right click/context menu
